@@ -22,7 +22,7 @@ class HospitalParserTest {
 
     @Test
     @DisplayName("ID가 파싱이 잘 되는지")
-    void name() throws IOException {
+    void id() throws IOException {
         List<Hospital> hospitals = reader.readLines(filename);
         Assertions.assertEquals("A1120837", hospitals.get(0).getId());
     }
@@ -53,5 +53,19 @@ class HospitalParserTest {
     void emergencyRoom() throws IOException {
         List<Hospital> hospitals = reader.readLines(filename);
         Assertions.assertEquals(2, hospitals.get(0).getEmergencyRoom());
+    }
+
+    @Test
+    @DisplayName("Name 이 파싱이 잘 되는지")
+    void name() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        Assertions.assertEquals("가산기대찬의원", hospitals.get(0).getName());
+    }
+
+    @Test
+    @DisplayName("Subdivision 이 파싱이 잘 되는지")
+    void subdivision() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        Assertions.assertEquals("치과", hospitals.get(3).getSubdivision());
     }
 }

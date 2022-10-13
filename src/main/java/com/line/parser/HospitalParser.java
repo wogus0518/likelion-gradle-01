@@ -16,8 +16,10 @@ public class HospitalParser implements Parser<Hospital> {
         String district = getDistrict(address);
         String category = splitted[2];
         int emergencyRoom = Integer.parseInt(splitted[6]);
+        String name = splitted[10];
+        String subdivision = getSubdivion(name);
 
-        return new Hospital(id, address, district, category, emergencyRoom);
+        return new Hospital(id, address, district, category, emergencyRoom, name, subdivision);
     }
 
     private String getDistrict(String address) {
@@ -25,13 +27,14 @@ public class HospitalParser implements Parser<Hospital> {
         return splitted[0] + " " + splitted[1];
     }
 
+    private String getSubdivion(String name) {
+        String[] subdivisionList = new String[]{"피부과", "소아과", "가정의학과", "치과", "안과", "산부인과", "비뇨기과"};
 
-//    @Override
-//    public Hospital parse(String str) {
-//        String[] info = str.split(",");
-//        if (info.length==6) {
-//            return new Hospital(info[0], info[1], info[2], info[3], Integer.parseInt(info[4]), info[5], null);
-//        }
-//        return new Hospital(info[0], info[1], info[2], info[3], Integer.parseInt(info[4]), info[5], info[6]);
-//    }
+        for (int i = 0; i < subdivisionList.length; i++) {
+            if (name.contains(subdivisionList[i])) {
+                return subdivisionList[i];
+            }
+        }
+        return null;
+    }
 }

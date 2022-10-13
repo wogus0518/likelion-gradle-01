@@ -9,14 +9,6 @@ public class Hospital {
     private String name;
     private String subdivision;
 
-    public Hospital(String id, String address, String district, String category, int emergencRoom) {
-        this.id = id;
-        this.address = address;
-        this.district = district;
-        this.category = category;
-        this.emergencRoom = emergencRoom;
-    }
-
     public Hospital(String id, String address, String district, String category, int emergencRoom, String name, String subdivision) {
         this.id = id;
         this.address = address;
