@@ -6,14 +6,22 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class HospitalParser implements Parser<Hospital> {
+
     @Override
     public Hospital parse(String str) {
-        String[] info = str.split(",");
+        String[] splitted = str.split(",");
 
-        String id = info[0];
-        String address = info[1];
+        String id = splitted[0];
+        String address = splitted[1];
+        String district = getDistrict(address);
+        String category = splitted[2];
 
-        return new Hospital(id, address);
+        return new Hospital(id, address, district, category);
+    }
+
+    private String getDistrict(String address) {
+        String[] splitted = address.split(" ");
+        return splitted[0] + " " + splitted[1];
     }
 
 

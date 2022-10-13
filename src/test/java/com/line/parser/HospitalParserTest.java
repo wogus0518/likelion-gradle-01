@@ -33,4 +33,18 @@ class HospitalParserTest {
         List<Hospital> hospitals = reader.readLines(filename);
         Assertions.assertEquals("서울특별시 금천구 벚꽃로 286 삼성리더스타워 111~114호 (가산동)", hospitals.get(0).getAddress());
     }
+
+    @Test
+    @DisplayName("District가 파싱이 잘 되는지")
+    void district() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        Assertions.assertEquals("서울특별시 금천구", hospitals.get(0).getDistrict());
+    }
+
+    @Test
+    @DisplayName("Category가 파싱이 잘 되는지")
+    void category() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        Assertions.assertEquals("C", hospitals.get(0).getCategory());
+    }
 }
