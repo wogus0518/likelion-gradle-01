@@ -28,7 +28,9 @@ public class HospitalParser implements Parser<Hospital> {
     }
 
     private String getSubdivion(String name) {
-        String[] subdivisionList = new String[]{"피부과", "소아과", "가정의학과", "치과", "안과", "산부인과", "비뇨기과"};
+        String[] subdivisionList = new String[]{
+                "피부과", "소아과", "가정의학과", "치과", "안과", "산부인과",
+                "비뇨기과", "내과", "정형외과", "성형외과", "이비인후과"};
 
         for (int i = 0; i < subdivisionList.length; i++) {
             if (name.contains(subdivisionList[i])) {
