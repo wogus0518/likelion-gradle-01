@@ -49,7 +49,7 @@ public class Hospital {
 
     public String getSQL() {
         String result = "INSERT INTO `likelion-db`.`seoul_hospital`(`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)" +
-                " VALUES ('" + this.id + "','" + this.address + "','" + this.district + "','" + this.category + "','" + this.emergencRoom + "','" + this.name + "',";
+                " VALUES ('" + this.id + "',\"" + this.address + "\",'" + this.district + "','" + this.category + "','" + this.emergencRoom + "','" + this.name + "',";
         if (this.subdivision != null) {
             result += "'" + this.subdivision + "');";
         } else {
