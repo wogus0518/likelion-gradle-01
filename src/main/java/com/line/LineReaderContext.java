@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineReader<T> {
+public class LineReaderContext<T> {
     Parser<T> parser;
     boolean isRemoveColumnName = true;
 
-    public LineReader(Parser<T> parser) {
+    public LineReaderContext(Parser<T> parser) {
         this.parser = parser;
     }
 

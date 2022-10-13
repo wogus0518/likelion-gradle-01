@@ -9,7 +9,11 @@ public class HospitalParser implements Parser<Hospital> {
     @Override
     public Hospital parse(String str) {
         String[] info = str.split(",");
-        return new Hospital(info[0]);
+
+        String id = info[0];
+        String address = info[1];
+
+        return new Hospital(id, address);
     }
 
 
