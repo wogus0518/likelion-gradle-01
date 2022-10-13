@@ -68,4 +68,33 @@ class HospitalParserTest {
         List<Hospital> hospitals = reader.readLines(filename);
         Assertions.assertEquals("치과", hospitals.get(3).getSubdivision());
     }
+
+    @Test
+    @DisplayName("SQL문이 잘 출력 되는지 - subdivision 없을 때")
+    void sqlNoSubdivision() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        Assertions.assertEquals("INSERT INTO `likelion-db`.`seoul_hospital`(`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`) " +
+                        "VALUES ('A1120837','서울특별시 금천구 벚꽃로 286 삼성리더스타워 111~114호 (가산동)','서울특별시 금천구','C','2','가산기대찬의원',null);",
+                hospitals.get(0).getSQL());
+    }
+
+    @Test
+    @DisplayName("SQL문이 잘 출력 되는지 - subdivision 있을 때")
+    void sqlExistSubdivision() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        System.out.println(hospitals.get(3).getSQL());
+        Assertions.assertEquals("INSERT INTO `likelion-db`.`seoul_hospital`(`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`) " +
+                "VALUES ('A1117873','서울특별시 관악구 신원로 38 5층 (신림동 청암빌딩)','서울특별시 관악구','N','2','가로수치과의원','치과');",
+                hospitals.get(3).getSQL());
+    }
+
+    @Test
+    @DisplayName("SQL문 전부 다 출력")
+    void printAll() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        for (int i = 0; i < hospitals.size(); i++) {
+            String query = hospitals.get(i).getSQL();
+            System.out.println(query);
+        }
+    }
 }
