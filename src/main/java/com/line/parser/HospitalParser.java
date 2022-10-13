@@ -15,8 +15,9 @@ public class HospitalParser implements Parser<Hospital> {
         String address = splitted[1];
         String district = getDistrict(address);
         String category = splitted[2];
+        int emergencyRoom = Integer.parseInt(splitted[6]);
 
-        return new Hospital(id, address, district, category);
+        return new Hospital(id, address, district, category, emergencyRoom);
     }
 
     private String getDistrict(String address) {

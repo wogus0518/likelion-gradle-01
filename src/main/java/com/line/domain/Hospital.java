@@ -5,23 +5,24 @@ public class Hospital {
     private String address;
     private String district;
     private String category;
-    private int emergency_room;
+    private int emergencRoom;
     private String name;
     private String subdivision;
 
-    public Hospital(String id, String address, String district, String category) {
+    public Hospital(String id, String address, String district, String category, int emergencRoom) {
         this.id = id;
         this.address = address;
         this.district = district;
         this.category = category;
+        this.emergencRoom = emergencRoom;
     }
 
-    public Hospital(String id, String address, String district, String category, int emergency_room, String name, String subdivision) {
+    public Hospital(String id, String address, String district, String category, int emergencRoom, String name, String subdivision) {
         this.id = id;
         this.address = address;
         this.district = district;
         this.category = category;
-        this.emergency_room = emergency_room;
+        this.emergencRoom = emergencRoom;
         this.name = name;
         this.subdivision = subdivision;
     }
@@ -42,8 +43,8 @@ public class Hospital {
         return category;
     }
 
-    public int getEmergency_room() {
-        return emergency_room;
+    public int getEmergencyRoom() {
+        return emergencRoom;
     }
 
     public String getName() {

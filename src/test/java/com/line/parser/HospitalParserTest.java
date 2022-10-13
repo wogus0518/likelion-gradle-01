@@ -47,4 +47,11 @@ class HospitalParserTest {
         List<Hospital> hospitals = reader.readLines(filename);
         Assertions.assertEquals("C", hospitals.get(0).getCategory());
     }
+
+    @Test
+    @DisplayName("EmergencyRoom이 파싱이 잘 되는지")
+    void emergencyRoom() throws IOException {
+        List<Hospital> hospitals = reader.readLines(filename);
+        Assertions.assertEquals(2, hospitals.get(0).getEmergencyRoom());
+    }
 }
