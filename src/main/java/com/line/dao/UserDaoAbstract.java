@@ -1,5 +1,4 @@
-package com.line;
-
+package com.line.dao;
 
 import com.line.domain.User;
 
@@ -9,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-
-public class UserDao {
+public abstract class UserDaoAbstract {
 
     public void add(User user) throws SQLException {
         String sql = "INSERT INTO users(id, name, password) VALUES(?, ?, ?)";
@@ -85,14 +83,7 @@ public class UserDao {
         }
     }
 
-    public Connection getConnection() throws SQLException {
-        Map<String, String> env = System.getenv();
-        String dbHost = env.get("DB_HOST");
-        String dbUser = env.get("DB_USER");
-        String dbPassword = env.get("DB_PASSWORD");
-
-        return DriverManager.getConnection(dbHost, dbUser, dbPassword);
-    }
+    public abstract Connection getConnection() throws SQLException;
 
     private void close(Connection conn, Statement stmt, ResultSet rs) {
         if (rs != null) {
@@ -118,14 +109,4 @@ public class UserDao {
         }
     }
 
-    public static void main(String[] args) throws SQLException{
-        UserDao userDao = new UserDao();
-//        userDao.add(new User("02", "two", "2222"));
-
-        User findUser = userDao.findById("02");
-        System.out.println("User's name : " + findUser.getName());
-
-        List<User> users = userDao.findAll();
-        System.out.println("전체 회원은 " + users.size() + "명");
-    }
 }
