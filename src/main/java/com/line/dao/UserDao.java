@@ -11,6 +11,11 @@ import java.util.NoSuchElementException;
 
 
 public class UserDao {
+    private final ConnectionMaker cm;
+
+    public UserDao(ConnectionMaker cm) {
+        this.cm = cm;
+    }
 
     public void add(User user) throws SQLException {
         String sql = "INSERT INTO users(id, name, password) VALUES(?, ?, ?)";
@@ -19,7 +24,7 @@ public class UserDao {
         PreparedStatement ps = null;
 
         try {
-            conn = getConnection();
+            conn = cm.getConnection();
             ps = conn.prepareStatement(sql);
 
             ps.setString(1, user.getId());
@@ -42,7 +47,7 @@ public class UserDao {
         ResultSet rs = null;
 
         try {
-            conn = getConnection();
+            conn = cm.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
 
@@ -70,7 +75,7 @@ public class UserDao {
         List<User> users = new ArrayList<>();
 
         try {
-            conn = getConnection();
+            conn = cm.getConnection();
             ps = conn.prepareStatement(sql);
 
             rs = ps.executeQuery();
@@ -83,15 +88,6 @@ public class UserDao {
         } finally {
             close(conn, ps, rs);
         }
-    }
-
-    public Connection getConnection() throws SQLException {
-        Map<String, String> env = System.getenv();
-        String dbHost = env.get("DB_HOST");
-        String dbUser = env.get("DB_USER");
-        String dbPassword = env.get("DB_PASSWORD");
-
-        return DriverManager.getConnection(dbHost, dbUser, dbPassword);
     }
 
     private void close(Connection conn, Statement stmt, ResultSet rs) {
@@ -116,16 +112,5 @@ public class UserDao {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) throws SQLException{
-        UserDao userDao = new UserDao();
-//        userDao.add(new User("02", "two", "2222"));
-
-        User findUser = userDao.findById("02");
-        System.out.println("User's name : " + findUser.getName());
-
-        List<User> users = userDao.findAll();
-        System.out.println("전체 회원은 " + users.size() + "명");
     }
 }
