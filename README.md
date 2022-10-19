@@ -11,4 +11,3 @@ DB
 
 결과물
 - insert-hospital.sql
-- 
